@@ -1,4 +1,4 @@
-# Welcome to my GitHub Repository.
+# Welcome to Alex Spence's GitHub Repository.
 
 ## About me:
 - Passionate up and coming data engineer with interests in business, sports, ubran science, and finance.
