@@ -18,3 +18,5 @@
 - application development
 - SQL code
 - tableau visualizations
+- presentations
+- reports
