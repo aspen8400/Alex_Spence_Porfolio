@@ -4,6 +4,8 @@ Final Project for Machine Learning
 All data files can be found here:<br/>
 [Shared Google Drive](https://drive.google.com/open?id=13tMrg0ahN-JjCLgwm-hRKZfy_tKtD2AV)
 
+Developed by Tim Connor, Sammie Kim, Antonio Robayo, and Alex Spence (NYU MS Data Science Students)
+
 ## Notebook Descriptions
 - **Review Processing:** Preprocessing pipeline specifically for the review text. Includes tokenization, lemmatization, as well as the removal of infrequent words and stop words.
 - **Additional Features:** Preprocessing pipeline that leverages user and product information. Also includes some text-based summary statistics (review word count & % of english words).
