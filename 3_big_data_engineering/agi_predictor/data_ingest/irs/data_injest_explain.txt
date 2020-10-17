@@ -1,1 +1,0 @@
-The commands in this Scala job explain how to move files over from local to dumbo to HDFS.
