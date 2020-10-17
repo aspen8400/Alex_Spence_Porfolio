@@ -13,10 +13,7 @@
 
 ## Application of Skills:
 - 1_data_science
-- 2_data_engineering
-- 3_big_data_engineering
-- 4_application_development
-- 5_SQL_code
-- 6_tableau_visualizations
-- 7_presentations
-- 8_reports
+- 2_big_data_engineering
+- 3_SQL_code
+- 4_presentations
+- 5_reports
