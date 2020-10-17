@@ -1,0 +1,5 @@
+export HADOOP_LIPATH=/opt/cloudera/parcels/CDH-5.15.0-1.cdh5.15.0.p0.21/lib
+javac -classpath $HADOOP_LIPATH/hadoop/*:$HADOOP_LIPATH/hadoop-0.20-mapreduce/*:$HADOOP_LIPATH/hadoop-hdfs/*   *.java
+jar cvf Profile.jar *.class
+hadoop jar Profile.jar Profile /user/mlu216/RBDA/Proj/Seasons_Stats.csv /user/mlu216/RBDA/Proj/output_p
+hdfs dfs -getmerge /user/mlu216/RBDA/Proj/output_p output_p.txt
