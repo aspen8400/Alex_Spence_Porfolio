@@ -11,12 +11,9 @@
 ## Skills:
 - Python, VBA, Java, Scala, SQL, Hadoop, HIVE, Impala, Excel, Tableau
 
-## Github folders:
-- data science
-- data engineering
-- big data engineering
-- application development
-- SQL code
-- tableau visualizations
-- presentations
-- reports
+## Application of Skills:
+- 1_data_science
+- 2_big_data_engineering
+- 3_SQL_code
+- 4_presentations
+- 5_reports
