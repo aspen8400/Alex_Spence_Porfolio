@@ -17,3 +17,6 @@
 - 3_SQL_code
 - 4_presentations
 - 5_reports
+
+## Linkedin:
+- https://www.linkedin.com/in/spencea1/
