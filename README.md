@@ -7,6 +7,7 @@
 - (732) 997-9555
 - ajs811@nyu.edu
 - Greater NYC Area
+- LinkedIn: https://www.linkedin.com/in/spencea1/
 
 ## Skills:
 - Python, SQL, Excel, Tableau, Git, PuTTy, pgAdmin, Impala, Hive, Scala, VBA, Apache Spark, Java, Linux, C++, Adobe Illustrator
@@ -17,6 +18,3 @@
 - 3_SQL_code
 - 4_presentations
 - 5_reports
-
-## Linkedin:
-- https://www.linkedin.com/in/spencea1/
