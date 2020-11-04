@@ -13,7 +13,7 @@
 - Python, SQL, Excel, Tableau, Git, PuTTy, pgAdmin, Impala, Hive, Scala, VBA, Apache Spark, Java, Linux, C++, Adobe Illustrator
 
 ## Application of Skills:
-- 1_data_science
+- 1_analysis
 - 2_big_data_engineering
 - 3_SQL_code
 - 4_presentations
