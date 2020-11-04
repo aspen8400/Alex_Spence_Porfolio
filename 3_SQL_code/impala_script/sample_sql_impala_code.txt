@@ -1,0 +1,278 @@
+//Create main advanced stats table
+
+create external table adv (index int, rank int, gp int, mpg float, ts_perc float, ast_rt float, tov_rt float, usg float, orr float, drr float, rebr float, per float, va float, ewa float, player string, team string, season int, season_player string)
+row format delimited fields terminated by '\t'
+location '/user/ajs811/rbda/project/cleaner/';
+
+
+//Create individual advanced ranking tables
+
+Create table ast_rt_rank as 
+select season_player, season, rank() over(partition by season order by ast_rt desc) as ast_rt_rank from adv;
+ 
+Create table ts_perc_rank as 
+select season_player, rank() over(partition by season order by ts_perc desc) as ts_perc_rank from adv;
+
+Create table tov_rt_rank as 
+select season_player, rank() over(partition by season order by tov_rt desc) as tov_rt_rank from adv;
+
+Create table usg_rank as 
+select season_player, rank() over(partition by season order by usg desc) as usg_rank from adv;
+
+Create table orr_rank as 
+select season_player, rank() over(partition by season order by orr desc) as orr_rank from adv;
+
+Create table drr_rank as 
+select season_player, rank() over(partition by season order by drr desc) as drr_rank from adv;
+
+Create table rebr_rank as 
+select season_player, rank() over(partition by season order by rebr desc) as rebr_rank from adv;
+
+Create table per_rank as 
+select season_player, rank() over(partition by season order by per desc) as per_rank from adv;
+
+Create table va_rank as 
+select season_player, rank() over(partition by season order by va desc) as va_rank from adv;
+
+Create table ewa_rank as 
+select season_player, rank() over(partition by season order by ewa desc) as ewa_rank from adv;
+
+
+//Create joined advanced stats ranking table
+
+Create table adv_rank as 
+select ast_rt_rank.season, ast_rt_rank.season_player, ast_rt_rank.ast_rt_rank, ts_perc_rank.ts_perc_rank, tov_rt_rank.tov_rt_rank, usg_rank.usg_rank, orr_rank.orr_rank, drr_rank.drr_rank, rebr_rank.rebr_rank, per_rank.per_rank, va_rank.va_rank, ewa_rank.ewa_rank
+  
+from ast_rt_rank inner join 
+ts_perc_rank inner join
+tov_rt_rank inner join 
+usg_rank inner join 
+orr_rank inner join
+drr_rank inner join
+rebr_rank inner join
+per_rank inner join
+va_rank inner join ewa_rank
+ 
+on ast_rt_rank.season_player = ts_perc_rank.season_player and 
+ts_perc_rank.season_player = tov_rt_rank.season_player and
+tov_rt_rank.season_player = usg_rank.season_player and
+usg_rank.season_player = orr_rank.season_player and
+orr_rank.season_player = drr_rank.season_player and
+drr_rank.season_player = rebr_rank.season_player and
+rebr_rank.season_player = per_rank.season_player and 
+per_rank.season_player = va_rank.season_player and
+va_rank.season_player = ewa_rank.season_player;
+
+
+//Create main traditional stats table
+
+Create external table trad (season int, player string, pos string, age int, fg int, fga int, fg_perc float, thp int, thpa int, thp_perc float, twop int, twopa int, twop_perc float, ft int, fta int, ft_perc float, orb int, drb int, trb int, ast int, stl int, blk int, tov int, pf int, pts int, season_player string)
+Row format delimited fields terminated by ','
+Location '/user/ajs811/rbda/project/data/trad'; 
+
+
+//Create individual traditional rankings tables
+
+Create table age_rank as 
+select season_player, season, rank() over(partition by season order by age desc) as age_rank from trad;
+
+Create table fg_rank as 
+select season_player, rank() over(partition by season order by fg desc) as fg_rank from trad;
+
+Create table fga_rank as 
+select season_player, rank() over(partition by season order by fga desc) as fga_rank from trad;
+
+Create table fg_perc_rank as 
+select season_player, rank() over(partition by season order by fg_perc desc) as fg_perc_rank from trad;
+
+Create table thp_rank as 
+select season_player, rank() over(partition by season order by thp desc) as thp_rank from trad;
+
+Create table thpa_rank as 
+select season_player, rank() over(partition by season order by thpa desc) as thpa_rank from trad;
+
+Create table thp_perc_rank as 
+select season_player, rank() over(partition by season order by thp_perc desc) as thp_perc_rank from trad;
+
+Create table twop_rank as 
+select season_player, rank() over(partition by season order by twop desc) as twop_rank from trad;
+
+Create table twopa_rank as 
+select season_player, rank() over(partition by season order by twopa desc) as twopa_rank from trad;
+
+Create table twop_perc_rank as 
+select season_player, rank() over(partition by season order by twop_perc desc) as twop_perc_rank from trad;
+
+Create table ft_rank as 
+select season_player, rank() over(partition by season order by ft desc) as ft_rank from trad;
+
+Create table fta_rank as 
+select season_player, rank() over(partition by season order by fta desc) as fta_rank from trad;
+
+Create table ft_perc_rank as 
+select season_player, rank() over(partition by season order by ft_perc desc) as ft_perc_rank from trad;
+
+Create table orb_rank as 
+select season_player, rank() over(partition by season order by orb desc) as orb_rank from trad;
+
+Create table drb_rank as 
+select season_player, rank() over(partition by season order by drb desc) as drb_rank from trad;
+
+Create table trb_rank as 
+select season_player, rank() over(partition by season order by trb desc) as trb_rank from trad;
+
+Create table ast_rank as 
+select season_player, rank() over(partition by season order by ast desc) as ast_rank from trad;
+
+Create table stl_rank as 
+select season_player, rank() over(partition by season order by stl desc) as stl_rank from trad;
+
+Create table blk_rank as 
+select season_player, rank() over(partition by season order by blk desc) as blk_rank from trad;
+
+Create table tov_rank as 
+select season_player, rank() over(partition by season order by tov desc) as tov_rank from trad;
+
+Create table pf_rank as 
+select season_player, rank() over(partition by season order by pf desc) as pf_rank from trad;
+
+Create table pts_rank as 
+select season_player, rank() over(partition by season order by pts desc) as pts_rank from trad;
+
+
+//Create joined traditional stats ranking table
+
+Create table trad_rank as 
+select age_rank.season, age_rank.season_player, age_rank.age_rank, 
+fg_rank.fg_rank, fga_rank.fga_rank, fg_perc_rank.fg_perc_rank, 
+thp_rank.thp_rank, thpa_rank.thpa_rank, thp_perc_rank.thp_perc_rank, 
+twop_rank.twop_rank, twopa_rank.twopa_rank, twop_perc_rank.twop_perc_rank, 
+ft_rank.ft_rank, fta_rank.fta_rank, ft_perc_rank.ft_perc_rank, 
+orb_rank.orb_rank, drb_rank.drb_rank, trb_rank.trb_rank, 
+ast_rank.ast_rank, stl_rank.stl_rank, blk_rank.blk_rank, 
+tov_rank.tov_rank, pf_rank.pf_rank, pts_rank.pts_rank
+
+from age_rank inner join 
+fg_rank inner join fga_rank inner join fg_perc_rank inner join
+thp_rank inner join thpa_rank inner join  thp_perc_rank inner join
+twop_rank inner join twopa_rank inner join  twop_perc_rank inner join 
+ft_rank inner join fta_rank inner join  ft_perc_rank inner join
+orb_rank inner join drb_rank inner join  trb_rank inner join  
+ast_rank inner join stl_rank inner join  blk_rank inner join
+tov_rank inner join pf_rank inner join pts_rank
+ 
+on age_rank.season_player = fg_rank.season_player and
+fg_rank.season_player = fga_rank.season_player and 
+fga_rank.season_player = fg_perc_rank.season_player and
+fg_perc_rank.season_player = thp_rank.season_player and 
+thp_rank.season_player = thpa_rank.season_player and 
+thpa_rank.season_player = thp_perc_rank.season_player and
+thp_perc_rank.season_player = twop_rank.season_player and
+twop_rank.season_player = twopa_rank.season_player and
+twopa_rank.season_player = twop_perc_rank.season_player and
+twop_perc_rank.season_player = ft_rank.season_player and
+ft_rank.season_player = fta_rank.season_player and
+fta_rank.season_player = ft_perc_rank.season_player and
+ft_perc_rank.season_player = orb_rank.season_player and
+orb_rank.season_player = drb_rank.season_player and
+drb_rank.season_player = trb_rank.season_player and
+trb_rank.season_player = ast_rank.season_player and
+ast_rank.season_player = stl_rank.season_player and
+stl_rank.season_player = blk_rank.season_player and
+blk_rank.season_player = tov_rank.season_player and
+tov_rank.season_player = pf_rank.season_player and
+pf_rank.season_player = pts_rank.season_player;
+
+
+//Create mvp winners table
+create external table mvp (season int, player string, team string, season_player string, mvp int)
+Row format delimited fields terminated by ','
+Location '/user/ajs811/rbda/project/data/mvp_raw/'; 
+
+
+//Join adv_rank with adv and mvp
+
+Create external table adv_master1 as select adv.season, adv.player, adv.team, adv.season_player, adv.ts_perc, adv.ast_rt, adv.tov_rt, adv.usg, adv.orr, adv.drr, adv.rebr, adv.per, adv.va, adv.ewa, adv_rank.ts_perc_rank, adv_rank.ast_rt_rank, adv_rank.tov_rt_rank, adv_rank.usg_rank, adv_rank.orr_rank, adv_rank.drr_rank, adv_rank.rebr_rank, adv_rank.per_rank, adv_rank.va_rank, adv_rank.ewa_rank
+
+From adv inner join adv_rank inner join mvp
+
+on adv.season_player = adv_rank.season_player and 
+adv_rank.season_player = mvp.season_player;
+
+
+//Join trad_rank with trad and mvp
+
+Create external table trad_master as select trad.season, trad.player, trad.season_player, trad.pos, trad.age, trad.fg, trad.fga, trad.fg_perc, trad.thp, trad.thpa, trad.thp_perc, trad.twop, trad.twopa, trad.twop_perc, trad.ft, trad.fta, trad.ft_perc, trad.orb, trad.drb, trad.trb, trad.ast, trad.stl, trad.blk, trad.tov, trad.pf, trad.pts, 
+trad_rank.age_rank, trad_rank.fg_rank, trad_rank.fga_rank, trad_rank.fg_perc_rank, trad_rank.thp_rank, trad_rank.thpa_rank, trad_rank.thp_perc_rank, trad_rank.twop_rank, trad_rank.twopa_rank, trad_rank.twop_perc_rank, trad_rank.ft_rank, trad_rank.fta_rank, trad_rank.ft_perc_rank, trad_rank.orb_rank, trad_rank.drb_rank, trad_rank.trb_rank, trad_rank.ast_rank, trad_rank.stl_rank, trad_rank.blk_rank, trad_rank.tov_rank, trad_rank.pf_rank, trad_rank.pts_rank
+
+From trad inner join trad_rank inner join mvp
+
+on trad.season_player = trad_rank.season_player and
+trad_rank.season_player = mvp.season_player
+
+
+//avg, min, max, variance sql queries
+
+//adv
+select count(season), count(player), count(team), count(season_player), avg(ts_perc), avg(ast_rt), avg(tov_rt), avg(usg), avg(orr), avg(drr), avg(rebr), avg(per), avg(va), avg(ewa), avg(ts_perc_rank), avg(ast_rt_rank), avg(tov_rt_rank), avg(usg_rank), avg(orr_rank), avg(drr_rank), avg(rebr_rank), avg(per_rank), avg(va_rank), avg(ewa_rank)
+From adv_master1;
+
+select count(season), count(player), count(team), count(season_player), min(ts_perc), min(ast_rt), min(tov_rt), min(usg), min(orr), min(drr), min(rebr), min(per), min(va), min(ewa), min(ts_perc_rank), min(ast_rt_rank), min(tov_rt_rank), min(usg_rank), min(orr_rank), min(drr_rank), min(rebr_rank), min(per_rank), min(va_rank), min(ewa_rank)
+From adv_master1;
+
+select count(season), count(player), count(team), count(season_player), max(ts_perc), max(ast_rt), max(tov_rt), max(usg), max(orr), max(drr), max(rebr), max(per), max(va), max(ewa), max(ts_perc_rank), max(ast_rt_rank), max(tov_rt_rank), max(usg_rank), max(orr_rank), max(drr_rank), max(rebr_rank), max(per_rank), max(va_rank), max(ewa_rank)
+From adv_master1;
+
+select count(season), count(player), count(team), count(season_player), variance(ts_perc), variance(ast_rt), variance(tov_rt), variance(usg), variance(orr), variance(drr), variance(rebr), variance(per), variance(va), variance(ewa), variance(ts_perc_rank), variance(ast_rt_rank), variance(tov_rt_rank), variance(usg_rank), variance(orr_rank), variance(drr_rank), variance(rebr_rank), variance(per_rank), variance(va_rank), variance(ewa_rank)
+From adv_master1;
+
+//MVP predictor queries - most informative advanced statistics are ewa, va, per
+//Calculate average Ewa, va, per ranking and take the highest mvp predictor
+
+Select table2.season_player, table2.predictor, mvp.team, mvp.mvp from
+(Select * from (Select season, season_player, (ewa_rank + va_rank + per_rank)/3.0 as predictor 
+from adv_rank) AS TABLE1
+Where TABLE1.predictor <= 2
+order by TABLE1.season, TABLE1.predictor) as table2
+left join mvp on
+table2.season_player = mvp.season_player
+Order by table2.season, table2.predictor;
+
+
+//trad
+select count(season), count(player), count(season_player), count(pos), avg(age), avg(fg), avg(fga), avg(fg_perc), avg(thp), avg(thpa), avg(thp_perc), avg(twop), avg(twopa), avg(twop_perc), avg(ft), avg(fta), avg(ft_perc), avg(orb), avg(drb), avg(trb), avg(ast), avg(stl), avg(blk), avg(tov), avg(pf), avg(pts), 
+avg(age_rank), avg(fg_rank), avg(fga_rank), avg(fg_perc_rank), avg(thp_rank), avg(thpa_rank), avg(thp_perc_rank), avg(twop_rank), avg(twopa_rank), avg(twop_perc_rank), avg(ft_rank), avg(fta_rank), avg(ft_perc_rank), avg(orb_rank), avg(drb_rank), avg(trb_rank), avg(ast_rank), avg(stl_rank), avg(blk_rank), avg(tov_rank), avg(pf_rank), avg(pts_rank)
+From trad_master;
+
+select count(season), count(player), count(season_player), count(pos), min(age), min(fg), min(fga), min(fg_perc), min(thp), min(thpa), min(thp_perc), min(twop), min(twopa), min(twop_perc), min(ft), min(fta), min(ft_perc), min(orb), min(drb), min(trb), min(ast), min(stl), min(blk), min(tov), min(pf), min(pts), 
+min(age_rank), min(fg_rank), min(fga_rank), min(fg_perc_rank), min(thp_rank), min(thpa_rank), min(thp_perc_rank), min(twop_rank), min(twopa_rank), min(twop_perc_rank), min(ft_rank), min(fta_rank), min(ft_perc_rank), min(orb_rank), min(drb_rank), min(trb_rank), min(ast_rank), min(stl_rank), min(blk_rank), min(tov_rank), min(pf_rank), min(pts_rank)
+From trad_master;
+
+select count(season), count(player), count(season_player), count(pos), max(age), max(fg), max(fga), max(fg_perc), max(thp), max(thpa), max(thp_perc), max(twop), max(twopa), max(twop_perc), max(ft), max(fta), max(ft_perc), max(orb), max(drb), max(trb), max(ast), max(stl), max(blk), max(tov), max(pf), max(pts), 
+max(age_rank), max(fg_rank), max(fga_rank), max(fg_perc_rank), max(thp_rank), max(thpa_rank), max(thp_perc_rank), max(twop_rank), max(twopa_rank), max(twop_perc_rank), max(ft_rank), max(fta_rank), max(ft_perc_rank), max(orb_rank), max(drb_rank), max(trb_rank), max(ast_rank), max(stl_rank), max(blk_rank), max(tov_rank), max(pf_rank), max(pts_rank)
+From trad_master;
+
+select count(season), count(player), count(season_player), count(pos), variance(age), variance(fg), variance(fga), variance(fg_perc), variance(thp), variance(thpa), variance(thp_perc), variance(twop), variance(twopa), variance(twop_perc), variance(ft), variance(fta), variance(ft_perc), variance(orb), variance(drb), variance(trb), variance(ast), variance(stl), variance(blk), variance(tov), variance(pf), variance(pts), 
+variance(age_rank), variance(fg_rank), variance(fga_rank), variance(fg_perc_rank), variance(thp_rank), variance(thpa_rank), variance(thp_perc_rank), variance(twop_rank), variance(twopa_rank), variance(twop_perc_rank), variance(ft_rank), variance(fta_rank), variance(ft_perc_rank), variance(orb_rank), variance(drb_rank), variance(trb_rank), variance(ast_rank), variance(stl_rank), variance(blk_rank), variance(tov_rank), variance(pf_rank), variance(pts_rank)
+From trad_master;
+
+//various sql queries
+select distinct(player) from adv where season = 2003 order by player;
+
+select player from adv where season = 2003 and player not in (select player from trad where season = 2003);
+
+select count(distinct(player)) from trad where season = 2003;
+
+select count(distinct(player)) from adv where season = 2003;
+
+select avg(va), avg(va_rank) from adv_master1 where season >= 2003 and season <= 2010
+
+Select avg(va), avg(va_rank) from adv_master1 where season >= 2009 and season <= 2017;
+
+
+//sql queres for presentation
+select season_player,team,round(per, 2) as per, round(va, 2) as va, round(ewa, 2) as ewa, round(ts_perc, 2) as ts_perc, round(usg, 2) as usg, round(orr, 2) as orr from adv limit 20;
+
+Select season_player, pts, pos, round(fg_perc, 2) as fg_perc, round(thp_perc, 2) as thp_perc, round(ft_perc, 2) as ft_perc, orb, ast, stl, blk, tov from trad limit 20;
+
+select season_player, player, team from mvp limit 20;
