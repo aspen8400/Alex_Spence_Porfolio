@@ -1,7 +1,7 @@
 # Welcome to Alex Spence's GitHub Repository.
 
 ## About me:
-- Passionate up and coming data analyst with interests in risk analysis, finance, business, sports, medicine, and urban science.  Pursuing a MS Data Science degree from New York University with plans to graduate in May 2021.
+- Passionate up and coming data analyst with diverse interests in risk analysis, finance, business, sports, medicine, and urban science.  Pursuing a MS Data Science degree from New York University with plans to graduate in May 2021.
 
 ## Contact Info:
 - (732) 997-9555
